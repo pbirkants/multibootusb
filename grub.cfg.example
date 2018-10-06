@@ -23,6 +23,9 @@ if loadfont unicode ; then
   fi
 fi
 
+insmod png
+set theme=$prefix/themes/invader/theme.txt
+
 # Timeout for menu
 set timeout=30
 
@@ -37,7 +40,7 @@ if [ -e "$prefix/mbusb.cfg" ]; then
 fi
 
 # Grub options
-submenu "GRUB2 options ->" {
+submenu "GRUB2 options ->" --class gear {
   menuentry "List devices/partitions" {
     ls -l
     sleep --interruptible 9999
@@ -81,11 +84,14 @@ submenu "GRUB2 options ->" {
   }
 }
 
+menuentry ' ' { # Empty line
+  true
+}
 # Reboot
-menuentry "Reboot" {
+menuentry "Reboot" --class shutdown {
   reboot
 }
 # Poweroff
-menuentry "Poweroff" {
+menuentry "Shutdown" --class shutdown {
   halt
 }
